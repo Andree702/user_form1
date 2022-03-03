@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB API FORM</title>
+    <link rel="stylesheet" href="form.css">
+    <script src="jquery.js"></script>
+
+    <style>
+        body{
+            padding: 0%;
+    margin: 0%;
+	background: url(pexels-ron-lach-10646406.jpg);
+	background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height:100vh;
+        }
+        </style>
+</head>
+<body>
+    <h1>Welcome,please Fill in the forms</h1>
+    <form method="post" action="processinfo.php" enctype="multipart/form-data">
+
+    <ul>
+    <li>
+        <label>full name</label>
+        <input type="text" name="name" class="name">
+    </li>
+    <li>
+        <label>Height</label>
+        <input type="float" name="height" placeholder="Height" class="height"> 
+    </li>
+    <li>
+        <label>Marital status</label>
+        <select class="status">
+            <option value="Married">Married</option>
+            <option value="Single">Single</option>
+            <option value="Divorced">Divorced</option>
+        </select>
+    </li>
+    <li>
+        <label>Date of birth</label>
+<input type="date" name="birth" class="birth">
+    </li>
+    <li>
+        <label>Ghana  Number</label>
+        <input type="text" name="gh_no" placeholder="Ghana Number" class="id"> 
+    </li>
+    
+    <li>
+        <input type='hidden' MAX_FILE_SIZE='9000000'>
+        <label>Add an image</label>
+        <input type='file' name='img' class="avatar">
+    </li>
+    
+    
+    
+        <input type="submit" value="Create">
+    </li>
+</ul>
+</form>
+<script>
+    $("form").submit(function(e){
+     // call back function for every state
+      function callBack(){
+            if((this.status == 408) || (this.status == 500) || (this.status == 501) || (this.status == 502) || (this.status == 503) || (this.status == 504)){
+          alert("an error occured processing your request");
+           }else{
+           if(this.readyState == 4){
+           //operation done continue, redirect to profile page, but for the mean time alert pop up will be shown
+           alert("The server has received the information");
+           location.href = 'profile.php';
+           }
+         }
+        }
+
+        e.preventDefault();//prevent the default behaviour
+     
+        //For data object for bundling of form
+        var a = new FormData();
+        a.append('name',$('.name').val());
+         a.append('height',$('.height').val());
+
+         a.append('status',$('.status').val());
+         a.append('birth',$('.birth').val());
+
+         a.append('id',$('.id').val());
+
+
+        a.append('img',$(".avatar")[0].files[0]);
+       //console.log(a.get('birth'))
+     //   ajax functionlities
+        var req = new XMLHttpRequest();
+        req.open("POST", "processinfo.php", true);
+         req.onreadystatechange = callBack;
+         req.send(a);
+
+    })//end submit
+
+</script>
+</body>
+</html>
