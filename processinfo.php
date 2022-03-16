@@ -25,12 +25,25 @@ if($type == 'image/gif' || $type == 'image/png' || $type == 'image/jpg' || $type
 	}
 	if($name){
 		//Query for saving new event
-		$query = sprintf("INSERT INTO users(full_name,height,marital,gh_no,img,birth) VALUES('%s',%d,'%s','%s','%s','%s');",
-		mysqli_real_escape_string($conn,$name),mysqli_real_escape_string($conn,$height),
-		mysqli_real_escape_string($conn,$marital),mysqli_real_escape_string($conn,$gh_no),
-		mysqli_real_escape_string($conn,$uploaded),mysqli_real_escape_string($conn,$birth));
+		// $query = sprintf("INSERT INTO users(full_name,height,marital,gh_no,img,birth) VALUES('%s',%d,'%s','%s','%s','%s');",
+		// mysqli_real_escape_string($conn,$name),mysqli_real_escape_string($conn,$height),
+		// mysqli_real_escape_string($conn,$marital),mysqli_real_escape_string($conn,$gh_no),
+		// mysqli_real_escape_string($conn,$uploaded),mysqli_real_escape_string($conn,$birth));
 	
-		$result = mysqli_query($conn,$query);
+		// $result = mysqli_query($conn,$query);
+		echo "<div class='style'>
+    
+        <div class='p1'><p>Name:$name</p>
+        <p>Height:$height</p>
+        
+        <p>Marital:$marital</p>
+        <p>Birth:$birth</p>
+        <p>GhanaCard Number:$gh_no</p>
+		<img  src='$uploaded' style='width:200px;'/></div>
+     
+        
+        
+        </div>";
 	}
 
 	?>
